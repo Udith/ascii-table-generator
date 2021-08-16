@@ -5,12 +5,9 @@ import {Tooltip2} from "@blueprintjs/popover2";
 import {IconNames} from "@blueprintjs/icons";
 import './input-table.css';
 import {ALIGNMENT} from "./table-generator";
+import randomWords from "random-words";
 
 export default class InputTable extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const columns = this.props.columns.map((column, index) => {
@@ -35,6 +32,12 @@ export default class InputTable extends React.Component {
                 <Table2 numRows={this.props.rows.length} numFrozenColumns={1}>
                     {[actionColumn].concat(columns)}
                 </Table2>
+
+                <div className='random-gen-btn-wrapper'>
+                    <Button minimal={true} icon={IconNames.RANDOM} onClick={this.autoFill}>
+                        Auto fill with Random Words
+                    </Button>
+                </div>
             </Fragment>
         );
     }
@@ -209,5 +212,30 @@ export default class InputTable extends React.Component {
                 return Classes.ALIGN_LEFT;
         }
     }
+
+    autoFill = () => {
+        // Fill Column names
+        this.props.columns.forEach((column, index) => {
+            const {name, align} = this.props.columns[index];
+            if (!name || name.trim() === '') {
+                this.props.onChangeColumn(index, `Column ${index + 1}`, align);
+            }
+        });
+
+        const numCols = this.props.numColumns;
+        // Fill the rows
+        const newRows = [];
+        for (let i = 0; i < this.props.rows.length; i++) {
+            // Generate half as 2 letter words
+            const halfCount = numCols / 2;
+            let words = randomWords({exactly: halfCount, wordsPerString: 2});
+            // Generate rest as one letter words
+            words = words.concat(randomWords({exactly: numCols - halfCount, wordsPerString: 1}));
+            // Shuffle words
+            words = words.sort(() => Math.random() - 0.5);
+            newRows.push(words);
+        }
+        this.props.onChangeRows(newRows);
+    };
 
 }
