@@ -1,0 +1,28 @@
+.column-header-with-align {
+  display: flex;
+}
+
+.row-action-btn {
+  .bp3-icon {
+    svg {
+      height: 12px;
+    }
+  }
+}
+
+.bp3-table-cell {
+  &.bp3-align-left {
+    text-align: left;
+  }
+  &.bp3-align-right {
+    text-align: right;
+  }
+  &.bp3-align-center {
+    text-align: center;
+  }
+}
+
+.instructions {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}

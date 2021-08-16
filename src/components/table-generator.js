@@ -1,15 +1,22 @@
 import React from "react";
-import {Classes, Label} from "@blueprintjs/core";
+import {Button, Classes, Intent, InputGroup, Label, Card} from "@blueprintjs/core";
 import './table-generator.css';
+import InputTable from "./input-table";
 
 const DEFAULT_COL_NUM = 3;
+export const ALIGNMENT = {
+    LEFT: 'left',
+    RIGHT: 'right',
+    CENTER:'center'
+}
 export default class TableGenerator extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             numCols: DEFAULT_COL_NUM,
-            columnNames: this.generateColumnNames(DEFAULT_COL_NUM)
+            columns: this.generateColumns(DEFAULT_COL_NUM),
+            rows: [new Array(DEFAULT_COL_NUM).fill('')]
         }
     }
 
@@ -20,28 +27,61 @@ export default class TableGenerator extends React.Component {
         });
     }
 
-    generateColumnNames = (numCols, currentNames = []) => {
-        if (numCols < currentNames) {
-            return currentNames.slice(0, numCols);
-        } else if (numCols > currentNames) {
-            const newColumnNames = [...currentNames];
-            for (let i = currentNames.length; i < numCols; i++) {
-                newColumnNames[i] = `Column ${i + 1}`;
-            }
-        }
-        return currentNames;
+    onColChangeApply = () => {
+        this.setState({
+            columns: this.generateColumns(this.state.numCols, this.state.columns)
+        });
     }
+
+    generateColumns = (numCols, currentColumns = []) => {
+        if (numCols < currentColumns.length) {
+            return currentColumns.slice(0, numCols);
+        } else if (numCols > currentColumns.length) {
+            const newColumns = [...currentColumns];
+            for (let i = currentColumns.length; i < numCols; i++) {
+                newColumns[i] = {name: `Column ${i + 1}`, align: ALIGNMENT.LEFT};
+            }
+            return newColumns;
+        }
+        return currentColumns;
+    }
+
+    onChangeRows = (rows) => {
+      this.setState({rows});
+    };
+
+    onChangeColumn = (columnIndex, name, align) => {
+        const columns = [...this.state.columns];
+        columns[columnIndex] = {name, align}
+        this.setState({columns});
+    };
 
     render() {
         return <div className='table-generator'>
-            <Label inline={true} className={Classes.INLINE}>
+            <Label className={Classes.INLINE}>
                 Number of Columns
-                <input className={Classes.INPUT} type='number'
-                       placeholder='Number of table columns'
-                       value={this.state.numCols}
-                       min={1}
-                       onChange={this.onNumColChange}/>
+                <InputGroup
+                    type='number'
+                    placeholder='Number of table columns'
+                    value={this.state.numCols}
+                    min={1}
+                    rightElement={
+                        <Button
+                            intent={Intent.SUCCESS}
+                            outlined={true}
+                            onClick={this.onColChangeApply}>Apply</Button>
+                    }
+                    onChange={this.onNumColChange}>
+                </InputGroup>
             </Label>
+            <Card>
+                <InputTable
+                    numColumns={this.state.numCols}
+                    columns={this.state.columns}
+                    rows={this.state.rows}
+                    onChangeRows={this.onChangeRows}
+                    onChangeColumn={this.onChangeColumn}/>
+            </Card>
         </div>;
     }
 }
