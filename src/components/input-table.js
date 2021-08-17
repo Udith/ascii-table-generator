@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {Cell, Column, ColumnHeaderCell, EditableCell2, EditableName, Table2} from "@blueprintjs/table";
-import {Button, Intent, Classes, UL, Callout} from "@blueprintjs/core";
+import {Button, Intent, Classes, UL, Callout, H3} from "@blueprintjs/core";
 import {Tooltip2} from "@blueprintjs/popover2";
 import {IconNames} from "@blueprintjs/icons";
 import './input-table.css';
@@ -17,11 +17,20 @@ export default class InputTable extends React.Component {
         });
 
         const actionColumn = <Column key='actions'
-                             columnHeaderCellRenderer={() => <ColumnHeaderCell name=''/>}
-                             cellRenderer={this.renderActionCell}/>;
+                                     columnHeaderCellRenderer={() => <ColumnHeaderCell name=''/>}
+                                     cellRenderer={this.renderActionCell}/>;
 
         return (
             <Fragment>
+                <div className='section-title-bar'>
+                    <H3>Input</H3>
+                    <div className='section-title-buttons'>
+                        <Button outlined={true} minimal={true} icon={IconNames.RANDOM} intent={Intent.WARNING}
+                                onClick={this.autoFill}>
+                            Auto fill with Random Words
+                        </Button>
+                    </div>
+                </div>
                 <Callout className='instructions'>
                     <UL>
                         <li>Click on a Column Header to edit the Column Name</li>
@@ -32,12 +41,6 @@ export default class InputTable extends React.Component {
                 <Table2 numRows={this.props.rows.length} numFrozenColumns={1}>
                     {[actionColumn].concat(columns)}
                 </Table2>
-
-                <div className='random-gen-btn-wrapper'>
-                    <Button minimal={true} icon={IconNames.RANDOM} onClick={this.autoFill}>
-                        Auto fill with Random Words
-                    </Button>
-                </div>
             </Fragment>
         );
     }
@@ -59,10 +62,10 @@ export default class InputTable extends React.Component {
             name={name}
             nameRenderer={columnName}>
             <Tooltip2 content={`Align ${align}`}>
-            <Button minimal={true}
-                    intent={Intent.PRIMARY}
-                    icon={this.getAlignmentIcon(align)}
-                    onClick={() => this.changeColumnAlignment(columnIndex - 1)}/>
+                <Button minimal={true}
+                        intent={Intent.PRIMARY}
+                        icon={this.getAlignmentIcon(align)}
+                        onClick={() => this.changeColumnAlignment(columnIndex - 1)}/>
             </Tooltip2>
         </ColumnHeaderCell>;
     };

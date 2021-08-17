@@ -1,3 +1,19 @@
 .table-generator {
   margin-top: 2rem;
+
+  .bp3-card:last-child {
+    margin-top: 1rem;
+  }
+
+  .section-title-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    .section-title-buttons {
+      .bp3-button:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
 }
