@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Classes, Intent, InputGroup, Label, Card} from "@blueprintjs/core";
 import './table-generator.css';
 import InputTable from "./input-table";
+import OutputTable from "./output-table";
 
 const DEFAULT_COL_NUM = 3;
 export const ALIGNMENT = {
@@ -81,6 +82,12 @@ export default class TableGenerator extends React.Component {
                     rows={this.state.rows}
                     onChangeRows={this.onChangeRows}
                     onChangeColumn={this.onChangeColumn}/>
+            </Card>
+            <Card>
+                <OutputTable
+                    numColumns={this.state.numCols}
+                    columns={this.state.columns}
+                    rows={this.state.rows}/>
             </Card>
         </div>;
     }
