@@ -21,7 +21,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-css": "node-sass-chokidar src/ -o src/"
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "predeploy": "npm run build-css;npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +44,17 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.2.3",
     "node-sass-chokidar": "^1.5.0"
+  },
+  "homepage": "https://Udith.github.io/ascii-table-generator",
+  "author": {
+    "email": "uditharosha@gmail.com",
+    "name": "Udith Gunaratna",
+    "url": "https://www.linkedin.com/in/udithg/"
+  },
+  "repository": {
+    "url": "https://github.com/Udith/ascii-table-generator",
+    "type": "git"
   }
 }
