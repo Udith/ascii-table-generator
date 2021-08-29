@@ -5,6 +5,9 @@ const toaster = Toaster.create({
     position: Position.BOTTOM_RIGHT
 });
 
+/**
+ * @author Udith Gunaratna
+ */
 class ToastUtil {
 
     showSuccessToast = (message) => {

@@ -10,6 +10,10 @@ export const ALIGNMENT = {
     RIGHT: 'right',
     CENTER:'center'
 }
+
+/**
+ * @author Udith Gunaratna
+ */
 export default class TableGenerator extends React.Component {
 
     constructor(props) {

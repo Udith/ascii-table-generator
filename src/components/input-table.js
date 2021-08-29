@@ -7,6 +7,9 @@ import './input-table.css';
 import {ALIGNMENT} from "./table-generator";
 import randomWords from "random-words";
 
+/**
+ * @author Udith Gunaratna
+ */
 export default class InputTable extends React.Component {
 
     render() {

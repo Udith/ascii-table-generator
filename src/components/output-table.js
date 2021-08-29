@@ -9,6 +9,10 @@ const BORDER_CHAR = '|';
 const CORNER_CHAR = '+';
 const HEADER_SEP_CHAR = '-';
 const ROW_SEP_CHAR = '.';
+
+/**
+ * @author Udith Gunaratna
+ */
 export default class OutputTable extends React.Component {
 
     constructor(props) {
