@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/ascii-table-generator/static/css/main.353b78ee.chunk.css",
+    "main.js": "/ascii-table-generator/static/js/main.d06bfdde.chunk.js",
+    "main.js.map": "/ascii-table-generator/static/js/main.d06bfdde.chunk.js.map",
+    "runtime-main.js": "/ascii-table-generator/static/js/runtime-main.5d616255.js",
+    "runtime-main.js.map": "/ascii-table-generator/static/js/runtime-main.5d616255.js.map",
+    "static/css/2.c0527f55.chunk.css": "/ascii-table-generator/static/css/2.c0527f55.chunk.css",
+    "static/js/2.dc17bbe8.chunk.js": "/ascii-table-generator/static/js/2.dc17bbe8.chunk.js",
+    "static/js/2.dc17bbe8.chunk.js.map": "/ascii-table-generator/static/js/2.dc17bbe8.chunk.js.map",
+    "static/js/3.58de9316.chunk.js": "/ascii-table-generator/static/js/3.58de9316.chunk.js",
+    "static/js/3.58de9316.chunk.js.map": "/ascii-table-generator/static/js/3.58de9316.chunk.js.map",
+    "index.html": "/ascii-table-generator/index.html",
+    "static/css/2.c0527f55.chunk.css.map": "/ascii-table-generator/static/css/2.c0527f55.chunk.css.map",
+    "static/css/main.353b78ee.chunk.css.map": "/ascii-table-generator/static/css/main.353b78ee.chunk.css.map",
+    "static/js/2.dc17bbe8.chunk.js.LICENSE.txt": "/ascii-table-generator/static/js/2.dc17bbe8.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/ascii-table-generator/static/media/icons-20.cde033c5.eot"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5d616255.js",
+    "static/css/2.c0527f55.chunk.css",
+    "static/js/2.dc17bbe8.chunk.js",
+    "static/css/main.353b78ee.chunk.css",
+    "static/js/main.d06bfdde.chunk.js"
+  ]
+}
