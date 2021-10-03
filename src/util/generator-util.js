@@ -52,7 +52,7 @@ function getColumnWidths(columns, rows) {
 }
 
 function generateRow(columnWidths, alignments, row) {
-    const cellValues = [];
+    let cellValues = [];
     row.forEach((cell, index) => {
         const colWidth = columnWidths[index];
         const alignment = alignments[index];
@@ -78,6 +78,21 @@ function generateRow(columnWidths, alignments, row) {
         }
         cellValues[index] = cellValue;
     });
+
+    const numColumns = columnWidths.length;
+    const numCells = cellValues.length;
+    // If cell count is greater than column count, remove extra cells from end
+    if (numCells > numColumns) {
+        cellValues = cellValues.slice(0, numColumns);
+    }
+
+    // If cell count is less than column count, fill with empty cells
+    if (numCells < numColumns) {
+        for (let i = cellValues.length; i < numColumns; i++) {
+            cellValues[i] = ' '.repeat(columnWidths[i]);
+        }
+    }
+
     return (BORDER_CHAR + cellValues.join(BORDER_CHAR) + BORDER_CHAR);
 }
 

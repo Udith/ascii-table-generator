@@ -135,6 +135,38 @@ test('Multi column & multi row (Right Aligned)', () => {
     `));
 });
 
+test('Row length > num columns', () => {
+  const columns = [getColumn('Column 1'), getColumn('Column 2')];
+  const rows = [['hello', 'world', '12345'], ['Sri', 'Lanka']];
+  const table = generateTable(columns, rows, true);
+
+  expect(table).toBe(tableToString(`
+    +----------+----------+
+    | Column 1 | Column 2 |
+    +----------+----------+
+    | hello    | world    |
+    |..........|..........|
+    | Sri      | Lanka    |
+    +----------+----------+
+    `));
+});
+
+test('Row length < num columns', () => {
+  const columns = [getColumn('Column 1'), getColumn('Column 2'), getColumn('Column 3')];
+  const rows = [['hello', 'world'], ['Sri', 'Lanka']];
+  const table = generateTable(columns, rows, true);
+
+  expect(table).toBe(tableToString(`
+    +----------+----------+----------+
+    | Column 1 | Column 2 | Column 3 |
+    +----------+----------+----------+
+    | hello    | world    |          |
+    |..........|..........|..........|
+    | Sri      | Lanka    |          |
+    +----------+----------+----------+
+    `));
+});
+
 function getColumn(name, align) {
     return {name, align};
 }
