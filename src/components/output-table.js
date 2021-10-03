@@ -2,13 +2,8 @@ import React, {Fragment} from "react";
 import {Button, Card, H3, Intent, Switch} from "@blueprintjs/core";
 import {IconNames} from "@blueprintjs/icons";
 import './output-table.css';
-import {ALIGNMENT} from "./table-generator";
 import {TOAST_UTIL} from "../util/toast-util";
-
-const BORDER_CHAR = '|';
-const CORNER_CHAR = '+';
-const HEADER_SEP_CHAR = '-';
-const ROW_SEP_CHAR = '.';
+import {generateTable} from "../util/generator-util";
 
 /**
  * @author Udith Gunaratna
@@ -81,97 +76,7 @@ export default class OutputTable extends React.Component {
 
     generateTable = () => {
         const {columns, rows} = this.props;
-        const columnWidths = this.getColumnWidths(columns, rows);
-
-        const alignments = columns.map(col => col.align);
-
-        let asciiTable = '';
-        const headerSep = this.getHeaderSeparator(columnWidths);
-        const rowSep = (this.state.addRowSep) ? this.getRowSeparator(columnWidths) : '';
-
-        asciiTable = this.addLineToTable(asciiTable, headerSep, true);
-        // Generate header with center aligned
-        asciiTable = this.addLineToTable(asciiTable, this.generateRow(columnWidths,
-            new Array(columns.length).fill(ALIGNMENT.CENTER), columns.map(col => col.name)));
-        asciiTable = this.addLineToTable(asciiTable, headerSep);
-
-        // Generate rows
-        rows.forEach((row, index) => {
-            asciiTable = this.addLineToTable(asciiTable, this.generateRow(columnWidths, alignments, row));
-            if ((this.state.addRowSep) && (index < (rows.length - 1))) {
-                asciiTable = this.addLineToTable(asciiTable, rowSep);
-            }
-        });
-        asciiTable = this.addLineToTable(asciiTable, headerSep);
-
+        const asciiTable = generateTable(columns, rows, this.state.addRowSep);
         this.setState({asciiTable, version: this.state.version + 1});
     };
-
-    getColumnWidths = (columns, rows) => {
-        const widths = [];
-
-        columns.forEach((column, index) => {
-            let maxWidth = column.name ? column.name.length : 0;
-            rows.forEach(row => {
-                const cellValue = row[index];
-                if ((cellValue) && (cellValue.length > maxWidth)) {
-                    maxWidth = cellValue.length;
-                }
-            });
-            widths[index] = maxWidth + 2; // extra 2 for padding on sides
-        });
-
-        return widths;
-    };
-
-    generateRow = (columnWidths, alignments, row) => {
-        const cellValues = [];
-        row.forEach((cell, index) => {
-            const colWidth = columnWidths[index];
-            const alignment = alignments[index];
-
-            let cellValue = cell;
-            switch (alignment) {
-                case ALIGNMENT.LEFT:
-                default: {
-                    cellValue = cellValue.padStart(cell.length + 1, ' ');
-                    cellValue = cellValue.padEnd(colWidth, ' ');
-                    break;
-                }
-                case ALIGNMENT.RIGHT: {
-                    cellValue = cellValue.padEnd(cell.length + 1, ' ');
-                    cellValue = cellValue.padStart(colWidth, ' ');
-                    break;
-                }
-                case ALIGNMENT.CENTER: {
-                    cellValue = cellValue.padStart(cell.length + ((colWidth - cell.length) / 2), ' ');
-                    cellValue = cellValue.padEnd(colWidth, ' ');
-                    break;
-                }
-            }
-            cellValues[index] = cellValue;
-        });
-        return (BORDER_CHAR + cellValues.join(BORDER_CHAR) + BORDER_CHAR);
-    };
-
-    getHeaderSeparator(columnWidths) {
-        let headerSeparator = CORNER_CHAR;
-        columnWidths.forEach(colWidth => {
-            headerSeparator += HEADER_SEP_CHAR.repeat(colWidth) + CORNER_CHAR;
-        });
-        return headerSeparator;
-    }
-
-    getRowSeparator(columnWidths) {
-        let rowSeparator = BORDER_CHAR;
-        columnWidths.forEach(colWidth => {
-            rowSeparator += ROW_SEP_CHAR.repeat(colWidth) + BORDER_CHAR;
-        });
-        return rowSeparator;
-    }
-
-    addLineToTable(table, line, noNewLinePrefix = false) {
-        return (table + (noNewLinePrefix ? '' : '\n') + line);
-    }
-
 }
