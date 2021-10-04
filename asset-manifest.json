@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ascii-table-generator/static/css/main.353b78ee.chunk.css",
-    "main.js": "/ascii-table-generator/static/js/main.d06bfdde.chunk.js",
-    "main.js.map": "/ascii-table-generator/static/js/main.d06bfdde.chunk.js.map",
+    "main.js": "/ascii-table-generator/static/js/main.eeb19b46.chunk.js",
+    "main.js.map": "/ascii-table-generator/static/js/main.eeb19b46.chunk.js.map",
     "runtime-main.js": "/ascii-table-generator/static/js/runtime-main.5d616255.js",
     "runtime-main.js.map": "/ascii-table-generator/static/js/runtime-main.5d616255.js.map",
     "static/css/2.c0527f55.chunk.css": "/ascii-table-generator/static/css/2.c0527f55.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.c0527f55.chunk.css",
     "static/js/2.dc17bbe8.chunk.js",
     "static/css/main.353b78ee.chunk.css",
-    "static/js/main.d06bfdde.chunk.js"
+    "static/js/main.eeb19b46.chunk.js"
   ]
 }
